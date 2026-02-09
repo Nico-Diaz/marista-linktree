@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Link {
+  title: string;
+  type: 'whatsapp' | 'external';
+  url?: string;
+  phone?: string;
+  isOcre: boolean;
+}
+
+const adminLinks: Link[] = [
+  { 
+    title: "PAGO FACTURAS", 
+    url: "https://app.aulica.com.ar/login.html?idCompany=820", 
+    type: "external", 
+    isOcre: true 
+  },
+  { 
+    title: "CONTACTO", 
+    phone: "5492615344622", // Reemplazar con el número de Administración
+    type: "whatsapp", 
+    isOcre: false 
+  },
+];
+
+const getHref = (link: Link) => {
+  return link.type === 'whatsapp' ? `https://wa.me/${link.phone}` : link.url;
+};
+---
+
+<Layout title="Administración - San José de Maristas">
+  <main class="container">
+    <div class="card">
+      <div class="logo-area">
+        <img src="/favicon.png" alt="Logo" class="logo-img" />
+      </div>
+
+      <h1 class="title">Administración</h1>
+
+      <div class="links-grid">
+        {adminLinks.map((link) => (
+          <a 
+            href={getHref(link)} 
+            target={link.type === 'external' ? "_blank" : "_self"}
+            rel="noopener noreferrer"
+            class={`btn ${link.isOcre ? 'btn-ocre' : 'btn-white'}`}
+          >
+            {link.title}
+          </a>
+        ))}
+      </div>
+
+      <a href="/" class="back-link">Volver al inicio</a>
+    </div>
+  </main>
+</Layout>

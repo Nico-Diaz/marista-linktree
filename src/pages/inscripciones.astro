@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Link {
+  title: string;
+  type: 'whatsapp' | 'external';
+  url?: string;
+  phone?: string;
+  isOcre: boolean;
+}
+
+const inscripcionesLinks: Link[] = [
+  { title: "NIVEL INICIAL", phone: "5492615407373", type: "external", isOcre: true },
+  { title: "NIVEL PRIMARIO", phone: "5492615336395", type: "external", isOcre: false },
+  { title: "NIVEL SECUNDARIO", phone: "5492616512025", type: "external", isOcre: true },
+];
+
+const getHref = (link: Link) => {
+  return link.type === 'whatsapp' ? `https://wa.me/${link.phone}` : link.url;
+};
+---
+
+<Layout title="Inscripciones - San José de Maristas">
+  <main class="container">
+    <div class="card">
+      <div class="logo-area">
+        <img src="/favicon.png" alt="Logo" class="logo-img" />
+      </div>
+
+      <h1 class="title">San José de Maristas</h1>
+
+      <div class="links-grid">
+        {inscripcionesLinks.map((link) => (
+          <a 
+            href={getHref(link)} 
+            target="_blank" 
+            class={`btn ${link.isOcre ? 'btn-ocre' : 'btn-white'}`}
+          >
+            {link.title}
+          </a>
+        ))}
+      </div>
+
+      <a href="/" class="back-link">Volver al inicio</a>
+    </div>
+  </main>
+</Layout>
+

@@ -1,23 +1,168 @@
+---
+interface Props { title: string; }
+const { title } = Astro.props;
+---
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
 	</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+  :root {
+    /* Azul más fuerte y profundo (menos verdoso) */
+    --color-fondo-app: #0a1f33; 
+    
+    /* Amarillo/Ocre con más saturación y fuerza */
+    --color-ocre: #b36b00;      
+    
+    --color-blanco: #ffffff;
+    --color-texto-azul: #0a1f33;
+    --bg-pagina: #d1d5db; 
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-pagina);
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Estilos compartidos para todas las páginas */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .card {
+    background-color: var(--color-fondo-app);
+    width: 100%;
+    max-width: 380px;
+    padding: 45px 25px;
+    border-radius: 28px;
+    text-align: center;
+    
+    /* Efecto Premium: Sombra externa para elevarla y interna para el borde superior */
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      0 20px 25px -5px rgba(0, 0, 0, 0.3), 
+      0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Ajuste del área del logo para que combine con el relieve */
+  .logo-area {
+    width: 90px;
+    height: 90px;
+    background-color: var(--color-blanco);
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    
+    /* Sombra interna para que el logo parezca "incrustado" */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 4px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .title {
+    color: var(--color-blanco);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 35px;
+    letter-spacing: 0.5px;
+  }
+
+  .links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn {
+    text-decoration: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border: none;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    /* Sombra externa suave para profundidad */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-ocre {
+    background-color: var(--color-ocre);
+    color: var(--color-blanco);
+    /* Relieve: luz arriba, sombra abajo (interna) */
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-white {
+    background-color: var(--color-blanco);
+    color: var(--color-texto-azul);
+    /* Relieve suave para el blanco */
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Efecto de presión al hacer clic */
+  .btn:active {
+    transform: translateY(2px);
+    box-shadow: 
+      inset 0 2px 4px rgba(0, 0, 0, 0.2),
+      0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 25px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  .logo-area {
+    width: 90px;           /* Tamaño del círculo blanco */
+    height: 90px;
+    background-color: var(--color-blanco);
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;      /* Corta cualquier parte de la imagen que sobresalga */
+    border: 3px solid rgba(255,255,255,0.1);
+  }
+
+  .logo-img {
+    width: 100%;           /* Ocupa el ancho del contenedor */
+    height: 100%;          /* Ocupa el alto del contenedor */
+    object-fit: contain;   /* AJUSTE CLAVE: Mantiene la proporción sin deformar ni salirse */
+    padding: 10px;         /* Espaciado interno para que el logo no toque los bordes del círculo */
+  }
 </style>

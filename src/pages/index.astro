@@ -1,11 +1,53 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+interface Link {
+  title: string;
+  type: 'whatsapp' | 'external';
+  url?: string;
+  phone?: string;
+  isOcre: boolean;
+}
+
+const links: Link[] = [
+  { title: "INSCRIPCIONES 2026", url: "./inscripciones", type: "external", isOcre: true },
+  { title: "SECRETARÍA", url: "./secretaria", type: "external", isOcre: false },
+  { title: "ADMINISTRACIÓN", url: "./administracion", type: "external", isOcre: true },
+  { title: "LIBRERÍA", phone: "5491100000000", type: "whatsapp", isOcre: false },
+  { title: "KIOSKO", phone: "5491100000000", type: "whatsapp", isOcre: true },
+  { title: "PASTORAL", url: "#", type: "external", isOcre: false },
+  { title: "¿DÓNDE ESTAMOS?", url: "#", type: "external", isOcre: true },
+];
+
+const getHref = (link: Link) => {
+  return link.type === 'whatsapp' 
+    ? `https://wa.me/${link.phone}` 
+    : link.url;
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="San José de Maristas">
+  <main class="container">
+    <div class="card">
+      
+      <div class="logo-area">
+        <img src="/favicon.png" alt="Logo" class="logo-img" />
+      </div>
+
+      <h1 class="title">San José de Maristas</h1>
+
+      <div class="links-grid">
+        {links.map((link) => (
+          <a 
+            href={getHref(link)} 
+            target="_blank" 
+            class={`btn ${link.isOcre ? 'btn-ocre' : 'btn-white'}`}
+          >
+            {link.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
 </Layout>
+
