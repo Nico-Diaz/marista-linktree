@@ -32,12 +32,12 @@ export const links = [
   { 
     title: "PASTORAL", 
     phone: "5492616433469", // URL Externa
-    type: "external",
+    type: "whatsapp",
     color: "bg-gray-200" 
   },
   { 
     title: "¿DONDE ESTAMOS?", 
-    url: "https://maps.google.com/...", // Google Maps
+    url: "https://www.google.com/maps/search/Av.+Champagnat+2980,+M5500+Mendoza,+Argentina", // Google Maps
     type: "external",
     color: "bg-[#a65d00]" 
   },
