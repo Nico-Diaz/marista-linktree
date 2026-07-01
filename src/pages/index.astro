@@ -1,53 +1,123 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-interface Link {
-  title: string;
-  type: 'whatsapp' | 'external';
-  url?: string;
-  phone?: string;
-  isOcre: boolean;
-}
-
-const links: Link[] = [
-  { title: "INSCRIPCIONES 2026", url: "./inscripciones", type: "external", isOcre: true },
-  { title: "SECRETARÍA", url: "./secretaria", type: "external", isOcre: false },
-  { title: "ADMINISTRACIÓN", url: "./administracion", type: "external", isOcre: true },
-  { title: "LIBRERÍA", phone: "5491100000000", type: "whatsapp", isOcre: false },
-  { title: "KIOSKO", phone: "5491100000000", type: "whatsapp", isOcre: true },
-
-  { title: "¿DÓNDE ESTAMOS?", url: "https://www.google.com/maps/search/Av.+Champagnat+2980,+M5500+Mendoza,+Argentina", type: "external", isOcre: false },
-];
-
-const getHref = (link: Link) => {
-  return link.type === 'whatsapp' 
-    ? `https://wa.me/${link.phone}` 
-    : link.url;
-};
 ---
 
 <Layout title="San José de Maristas">
   <main class="container">
     <div class="card">
-      
+
       <div class="logo-area">
         <img src="/favicon.png" alt="Logo" class="logo-img" />
       </div>
 
-      <h1 class="title">San José de Maristas</h1>
+      <h1 class="title" id="page-title">San José de Maristas</h1>
 
-      <div class="links-grid">
-        {links.map((link) => (
-          <a 
-            href={getHref(link)} 
-            target="_blank" 
-            class={`btn ${link.isOcre ? 'btn-ocre' : 'btn-white'}`}
-          >
-            {link.title}
-          </a>
-        ))}
+      <div class="links-grid" id="links-container">
+        <!-- HOME -->
+        <div class="view active" data-view="home">
+          <a href="#" class="btn btn-ocre" data-navigate="inscripciones">INSCRIPCIONES 2026</a>
+          <a href="#" class="btn btn-white" data-navigate="secretaria">SECRETARÍA</a>
+          <a href="#" class="btn btn-ocre" data-navigate="administracion">ADMINISTRACIÓN</a>
+          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-white">LIBRERÍA</a>
+          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-ocre">KIOSKO</a>
+          <a href="https://www.google.com/maps/search/Av.+Champagnat+2980,+M5500+Mendoza,+Argentina" target="_blank" class="btn btn-white">¿DÓNDE ESTAMOS?</a>
+        </div>
+
+        <!-- INSCRIPCIONES -->
+        <div class="view" data-view="inscripciones">
+          <a href="https://wa.me/5492615407373" target="_blank" class="btn btn-ocre">NIVEL INICIAL</a>
+          <a href="https://wa.me/5492615336395" target="_blank" class="btn btn-white">NIVEL PRIMARIO</a>
+          <a href="https://wa.me/5492616512025" target="_blank" class="btn btn-ocre">NIVEL SECUNDARIO</a>
+        </div>
+
+        <!-- SECRETARIA -->
+        <div class="view" data-view="secretaria">
+          <a href="tel:" class="btn btn-ocre">TELÉFONO FIJO</a>
+          <a href="https://wa.me/5492613000073" target="_blank" class="btn btn-white">CELULAR</a>
+        </div>
+
+        <!-- ADMINISTRACION -->
+        <div class="view" data-view="administracion">
+          <a href="https://app.aulica.com.ar/login.html?idCompany=820" target="_blank" class="btn btn-ocre">PAGO FACTURAS</a>
+          <a href="https://wa.me/5492615344622" target="_blank" class="btn btn-white">CONTACTO</a>
+        </div>
       </div>
+
+      <a href="#" class="back-link" id="back-btn" style="display:none;">Volver al inicio</a>
     </div>
   </main>
 </Layout>
 
+<script>
+  const titles: Record<string, string> = {
+    home: "San José de Maristas",
+    inscripciones: "Inscripciones",
+    secretaria: "Secretaría",
+    administracion: "Administración",
+  };
+
+  const container = document.getElementById("links-container")!;
+  const titleEl = document.getElementById("page-title")!;
+  const backBtn = document.getElementById("back-btn")!;
+  let current = "home";
+
+  function navigate(view: string) {
+    const prev = container.querySelector(`.view[data-view="${current}"]`) as HTMLElement;
+    const next = container.querySelector(`.view[data-view="${view}"]`) as HTMLElement;
+
+    if (!prev || !next || view === current) return;
+
+    prev.classList.add("fade-out");
+
+    setTimeout(() => {
+      prev.classList.remove("active", "fade-out");
+      next.classList.add("active", "fade-in");
+      titleEl.textContent = titles[view] || "San José de Maristas";
+      current = view;
+      backBtn.style.display = view === "home" ? "none" : "inline-block";
+
+      setTimeout(() => next.classList.remove("fade-in"), 300);
+    }, 250);
+  }
+
+  container.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const nav = target.closest("[data-navigate]") as HTMLElement;
+    if (nav) {
+      e.preventDefault();
+      navigate(nav.dataset.navigate!);
+    }
+  });
+
+  backBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    navigate("home");
+  });
+</script>
+
+<style>
+  .view {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .view.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .view.fade-out {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  .view.fade-in {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+</style>
