@@ -18,9 +18,8 @@ import Layout from '../layouts/Layout.astro';
           <a href="#" class="btn btn-ocre" data-navigate="inscripciones">INSCRIPCIONES 2026</a>
           <a href="#" class="btn btn-white" data-navigate="secretaria">SECRETARÍA</a>
           <a href="#" class="btn btn-ocre" data-navigate="administracion">ADMINISTRACIÓN</a>
-          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-white">LIBRERÍA</a>
-          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-ocre">KIOSKO</a>
-          <a href="https://www.google.com/maps/search/Av.+Champagnat+2980,+M5500+Mendoza,+Argentina" target="_blank" class="btn btn-white">¿DÓNDE ESTAMOS?</a>
+          <a href="#" class="btn btn-white" data-navigate="servicio">SERVICIO</a>
+          <a href="https://www.google.com/maps/search/Av.+Champagnat+2980,+M5500+Mendoza,+Argentina" target="_blank" class="btn btn-ocre">¿DÓNDE ESTAMOS?</a>
         </div>
 
         <!-- INSCRIPCIONES -->
@@ -41,6 +40,18 @@ import Layout from '../layouts/Layout.astro';
           <a href="https://app.aulica.com.ar/login.html?idCompany=820" target="_blank" class="btn btn-ocre">PAGO FACTURAS</a>
           <a href="https://wa.me/5492615344622" target="_blank" class="btn btn-white">CONTACTO</a>
         </div>
+
+        <!-- SERVICIO -->
+        <div class="view" data-view="servicio">
+          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-ocre">LIBRERÍA</a>
+          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-white">KIOSKO</a>
+          <a href="#" class="btn btn-ocre" data-navigate="ropero">ROPERO</a>
+        </div>
+
+        <!-- ROPERO -->
+        <div class="view" data-view="ropero">
+          <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Próximamente</p>
+        </div>
       </div>
 
       <a href="#" class="back-link" id="back-btn" style="display:none;">Volver al inicio</a>
@@ -54,6 +65,8 @@ import Layout from '../layouts/Layout.astro';
     inscripciones: "Inscripciones",
     secretaria: "Secretaría",
     administracion: "Administración",
+    servicio: "Servicio",
+    ropero: "Ropero",
   };
 
   const container = document.getElementById("links-container")!;
