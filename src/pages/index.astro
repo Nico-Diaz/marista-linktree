@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="San José de Maristas">
+<Layout title="Colegio Marista San Jose, Mendoza">
   <main class="container">
     <div class="card">
 
@@ -10,7 +10,7 @@ import Layout from '../layouts/Layout.astro';
         <img src="/favicon.png" alt="Logo" class="logo-img" />
       </div>
 
-      <h1 class="title" id="page-title">San José de Maristas</h1>
+      <h1 class="title" id="page-title">Colegio Marista San Jose, Mendoza</h1>
 
       <div class="links-grid" id="links-container">
         <!-- HOME -->
@@ -61,7 +61,7 @@ import Layout from '../layouts/Layout.astro';
 
 <script>
   const titles: Record<string, string> = {
-    home: "San José de Maristas",
+    home: "Colegio Marista San Jose, Mendoza",
     inscripciones: "Inscripciones",
     secretaria: "Secretaría",
     administracion: "Administración",
@@ -85,7 +85,7 @@ import Layout from '../layouts/Layout.astro';
     setTimeout(() => {
       prev.classList.remove("active", "fade-out");
       next.classList.add("active", "fade-in");
-      titleEl.textContent = titles[view] || "San José de Maristas";
+      titleEl.textContent = titles[view] || "Colegio Marista San Jose, Mendoza";
       current = view;
       backBtn.style.display = view === "home" ? "none" : "inline-block";
 
