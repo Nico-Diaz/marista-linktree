@@ -19,6 +19,8 @@ import Layout from '../layouts/Layout.astro';
           <a href="#" class="btn btn-white" data-navigate="secretaria">SECRETARÍA</a>
           <a href="#" class="btn btn-ocre" data-navigate="administracion">ADMINISTRACIÓN</a>
           <a href="#" class="btn btn-white" data-navigate="servicio">SERVICIO</a>
+          <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x967e0808a59a8f81:0x81beed916d1ab13e?sa=X&ved=1t:8290&ictx=111" target="_blank" class="btn btn-ocre">VILLA MARISTA</a>
+          <a href="https://www.cmsjm.org.ar" target="_blank" class="btn btn-white">WEB</a>
           <a href="https://www.google.com/maps/search/Av.+Champagnat+2980,+M5500+Mendoza,+Argentina" target="_blank" class="btn btn-ocre">¿DÓNDE ESTAMOS?</a>
         </div>
 
@@ -44,13 +46,14 @@ import Layout from '../layouts/Layout.astro';
         <!-- SERVICIO -->
         <div class="view" data-view="servicio">
           <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-ocre">LIBRERÍA</a>
-          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-white">KIOSKO</a>
+          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-white">KIOSKO/COMEDOR</a>
           <a href="#" class="btn btn-ocre" data-navigate="ropero">ROPERO</a>
         </div>
 
         <!-- ROPERO -->
         <div class="view" data-view="ropero">
-          <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Próximamente</p>
+          <img src="/horario-ropero.jpeg" alt="Horario Ropero" class="ropero-img" />
+          <button class="ropero-back-btn" id="ropero-back-btn">← Volver</button>
         </div>
       </div>
 
@@ -61,17 +64,21 @@ import Layout from '../layouts/Layout.astro';
 
 <script>
   const titles: Record<string, string> = {
-    home: "Colegio Marista San Jose, Mendoza",
+    home: "Colegio Marista San José, Mendoza",
     inscripciones: "Inscripciones",
     secretaria: "Secretaría",
     administracion: "Administración",
     servicio: "Servicio",
     ropero: "Ropero",
+    web: "Web",
+    villamarista: "Villa Marista",
   };
 
   const container = document.getElementById("links-container")!;
   const titleEl = document.getElementById("page-title")!;
   const backBtn = document.getElementById("back-btn")!;
+  const logoArea = document.querySelector(".logo-area") as HTMLElement;
+  const card = document.querySelector(".card") as HTMLElement;
   let current = "home";
 
   function navigate(view: string) {
@@ -85,9 +92,14 @@ import Layout from '../layouts/Layout.astro';
     setTimeout(() => {
       prev.classList.remove("active", "fade-out");
       next.classList.add("active", "fade-in");
-      titleEl.textContent = titles[view] || "Colegio Marista San Jose, Mendoza";
+      titleEl.textContent = titles[view] || "Colegio Marista San José, Mendoza";
       current = view;
+
+      const isRopero = view === "ropero";
+      logoArea.style.display = isRopero ? "none" : "flex";
+      titleEl.style.display = isRopero ? "none" : "block";
       backBtn.style.display = view === "home" ? "none" : "inline-block";
+      card.classList.toggle("card-ropero", isRopero);
 
       setTimeout(() => next.classList.remove("fade-in"), 300);
     }, 250);
@@ -104,6 +116,13 @@ import Layout from '../layouts/Layout.astro';
 
   backBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    navigate("home");
+  });
+
+  const roperoBackBtn = document.getElementById("ropero-back-btn")!;
+  roperoBackBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     navigate("home");
   });
 </script>
@@ -132,5 +151,59 @@ import Layout from '../layouts/Layout.astro';
   .view.fade-in {
     opacity: 0;
     transform: translateY(8px);
+  }
+
+  .ropero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .view[data-view="ropero"] {
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+    z-index: 100;
+  }
+
+  .card-ropero {
+    padding: 0 !important;
+    overflow: hidden;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .ropero-back-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #0a1f33;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 110;
+    backdrop-filter: blur(4px);
+  }
+
+  .ropero-back-btn:active {
+    transform: scale(0.95);
   }
 </style>

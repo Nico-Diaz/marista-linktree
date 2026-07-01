@@ -6,7 +6,7 @@ export const links = [
     color: "bg-[#a65d00]" 
   },
   { 
-    title: "SECRETARIA", 
+    title: "SECRETARÍA",
     url: "../secretaria", // URL Externa
     type: "external",
     color: "bg-gray-200" 
@@ -18,7 +18,7 @@ export const links = [
     color: "bg-[#a65d00]" 
   },
   { 
-    title: "LIBRERIA", 
+    title: "LIBRERÍA",
     phone: "5492615876566", // Número directo
     type: "whatsapp",
     color: "bg-gray-200" 
@@ -36,7 +36,7 @@ export const links = [
     color: "bg-gray-200" 
   },
   { 
-    title: "¿DONDE ESTAMOS?", 
+    title: "¿DÓNDE ESTAMOS?",
     url: "https://www.google.com/maps/search/Av.+Champagnat+2980,+M5500+Mendoza,+Argentina", // Google Maps
     type: "external",
     color: "bg-[#a65d00]" 
