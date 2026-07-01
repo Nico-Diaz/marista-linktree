@@ -165,4 +165,104 @@ const { title } = Astro.props;
     object-fit: contain;   /* AJUSTE CLAVE: Mantiene la proporción sin deformar ni salirse */
     padding: 10px;         /* Espaciado interno para que el logo no toque los bordes del círculo */
   }
+
+  /* Responsive: pantallas pequeñas (max 400px) */
+  @media (max-width: 400px) {
+    .container {
+      padding: 15px;
+    }
+
+    .card {
+      padding: 35px 20px;
+      border-radius: 22px;
+    }
+
+    .logo-area {
+      width: 75px;
+      height: 75px;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-size: 1.3rem;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      padding: 14px;
+      font-size: 0.85rem;
+      border-radius: 10px;
+    }
+  }
+
+  /* Responsive: pantallas muy pequeñas (max 340px) */
+  @media (max-width: 340px) {
+    .container {
+      padding: 10px;
+    }
+
+    .card {
+      padding: 30px 15px;
+      border-radius: 18px;
+    }
+
+    .logo-area {
+      width: 65px;
+      height: 65px;
+      margin-bottom: 18px;
+    }
+
+    .title {
+      font-size: 1.15rem;
+      margin-bottom: 22px;
+    }
+
+    .btn {
+      padding: 12px;
+      font-size: 0.8rem;
+    }
+
+    .links-grid {
+      gap: 10px;
+    }
+  }
+
+  /* Responsive: tablets y pantallas medianas (min 768px) */
+  @media (min-width: 768px) {
+    .card {
+      max-width: 420px;
+      padding: 50px 30px;
+    }
+
+    .logo-area {
+      width: 100px;
+      height: 100px;
+    }
+
+    .title {
+      font-size: 1.7rem;
+    }
+
+    .btn {
+      padding: 18px;
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Responsive: desktop (min 1024px) */
+  @media (min-width: 1024px) {
+    .card {
+      max-width: 440px;
+      padding: 55px 35px;
+    }
+
+    .logo-area {
+      width: 110px;
+      height: 110px;
+    }
+
+    .title {
+      font-size: 1.8rem;
+    }
+  }
 </style>
