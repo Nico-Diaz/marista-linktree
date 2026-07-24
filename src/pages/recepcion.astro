@@ -8,9 +8,9 @@ interface Link {
   isOcre: boolean;
 }
 
-const secretariaLinks: Link[] = [
+const recepcionLinks: Link[] = [
   { title: "TELÉFONO FIJO", phone: "", type: "call", isOcre: true },
-  { title: "CELULAR", phone: "5492613000073", type: "whatsapp", isOcre: false },
+  { title: "CELULAR", phone: "5492615336442", type: "whatsapp", isOcre: false },
 ];
 
 const getHref = (link: Link) => {
@@ -20,17 +20,17 @@ const getHref = (link: Link) => {
 };
 ---
 
-<Layout title="Secretaría - San José de Maristas">
+<Layout title="Recepción - San José de Maristas">
   <main class="container">
     <div class="card">
       <div class="logo-area">
         <img src="/favicon.png" alt="Logo" class="logo-img" />
       </div>
 
-      <h1 class="title">Secretaría</h1>
+      <h1 class="title">Recepción</h1>
 
       <div class="links-grid">
-        {secretariaLinks.map((link) => (
+        {recepcionLinks.map((link) => (
           <a 
             href={getHref(link)} 
             class={`btn ${link.isOcre ? 'btn-ocre' : 'btn-white'}`}

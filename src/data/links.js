@@ -1,13 +1,13 @@
 export const links = [
   { 
-    title: "INSCRIPCIONES 2026", 
+    title: "INSCRIPCIONES 2027", 
     url: "../inscripciones", // URL Externa
     type: "external",
     color: "bg-[#a65d00]" 
   },
   { 
-    title: "SECRETARÍA",
-    url: "../secretaria", // URL Externa
+    title: "RECEPCIÓN",
+    url: "../recepcion", // URL Externa
     type: "external",
     color: "bg-gray-200" 
   },
